@@ -2,7 +2,6 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Menu from './pages/Menu';
 import Product from './pages/Product';
-import './App.css';
 
 function App() {
   return (

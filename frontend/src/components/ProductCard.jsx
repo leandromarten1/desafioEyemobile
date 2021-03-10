@@ -1,16 +1,31 @@
-function ProductCard() {
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+const convertCurrency = (price) => {
+  return price.toLocaleString('pt-br', {
+    style: 'currency',
+    currency: 'BRL',
+  });
+};
+
+function ProductCard(props) {
+  const { id, image, name, price } = props.info;
   return (
-    <div className='card d-flex mb-4 mx-2' style={{ width: '150px' }}>
-      <img
-        className='card-img-top'
-        src='https://picsum.photos/70/50'
-        alt='title'
-      />
-      <div className='card-body p-2 text-center'>
-        <h5 className='card-title'>Card title</h5>
-        <p claclassNamess='card-text'>R$ 12,00</p>
+    <Link to={`/${id}`}>
+      <div className='card d-flex mb-4 mx-2' style={{ width: '150px' }}>
+        <img
+          className='card-img-top'
+          src={image}
+          width={130}
+          height={140}
+          alt={name}
+        />
+        <div className='card-body p-2 text-center'>
+          <h5 className='card-title'>{name}</h5>
+          <p className='card-text'>{convertCurrency(price)}</p>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 }
 
