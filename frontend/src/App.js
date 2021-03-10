@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import Menu from './pages/Menu';
 import Product from './pages/Product';
 import Checkout from './pages/Checkout';
+import Login from './pages/Login';
 
 function App() {
   return (
@@ -12,6 +13,9 @@ function App() {
       </Route>
       <Route exact path='/checkout'>
         <Checkout />
+      </Route>
+      <Route exact path='/login'>
+        <Login />
       </Route>
       <Route exact path='/:id'>
         <Product />

@@ -21,15 +21,15 @@ function Footer() {
   };
 
   return (
-    <footer className='fixed-bottom navbar navbar-lg navbar-light bg-info p-4 d-flex'>
+    <footer className='fixed-bottom navbar navbar-lg bg-main p-4 d-flex'>
       <div className='container'>
         <div className='d-flex flex-column'>
-          <h6 className='text-secondary'>{totalItens} itens</h6>
-          <h5>{totalPrice}</h5>
+          <h6 className='text-light'>{totalItens} itens</h6>
+          <h5 className='text-body'>{totalPrice}</h5>
         </div>
-        <Link to='/checkout' className='btn btn-secondary'>Finalizar pedido</Link>
+        <Link to='/checkout' className='btn btn-outline-light'>Finalizar pedido</Link>
         <i
-          className='bi-trash'
+          className='bi-trash text-light'
           onClick={() => removeCartItems()}
           style={{ fontSize: '40px' }}
         ></i>
