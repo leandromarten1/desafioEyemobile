@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { removeAllCart } from '../redux/actions';
 
 function Footer() {
@@ -23,10 +24,10 @@ function Footer() {
     <footer className='fixed-bottom navbar navbar-lg navbar-light bg-info p-4 d-flex'>
       <div className='container'>
         <div className='d-flex flex-column'>
-          <span className='text-secondary'>{totalItens} itens</span>
-          <span>{totalPrice}</span>
+          <h6 className='text-secondary'>{totalItens} itens</h6>
+          <h5>{totalPrice}</h5>
         </div>
-        <button className='btn btn-secondary'>Finalizar pedido</button>
+        <Link to='/checkout' className='btn btn-secondary'>Finalizar pedido</Link>
         <i
           className='bi-trash'
           onClick={() => removeCartItems()}
