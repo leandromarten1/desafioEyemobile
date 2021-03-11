@@ -27,7 +27,7 @@ function Footer() {
           <h6 className='text-light'>{totalItens} itens</h6>
           <h5 className='text-body'>{totalPrice}</h5>
         </div>
-        <Link to='/checkout' className='btn btn-outline-light'>Finalizar pedido</Link>
+        <Link to='/checkout' className='btn btn-outline-light'>Checkout</Link>
         <i
           className='bi-trash text-light'
           onClick={() => removeCartItems()}
