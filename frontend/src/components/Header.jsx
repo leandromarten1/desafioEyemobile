@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 
 function Header() {
   return (
-    <header className='navbar navbar-lg text-light bg-main p-4 d-flex mb-4'>
+    <header className='navbar navbar-lg bg-main p-4 d-flex mb-4'>
       <div className="container">
       <Link to='/' className="navbar-brand text-light">Café XYZ</Link>
-      <div className="navbar-brand"><i className="bi-person" style={{fontSize: "40px"}}></i></div>
+      <Link to='/login' className="navbar-brand text-light"><i className="bi-person" style={{fontSize: "40px"}}></i></Link>
       </div>
     </header>
   );

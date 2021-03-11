@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import {
-  addToCart,
-  removeFromCart,
-} from '../redux/actions';
+import { addToCart, updateQuantity } from '../redux/actions';
 import mock from '../services/mockApi';
 
 function Product() {
   const dispatch = useDispatch();
   const { id } = useParams();
+  // const carrinho = useSelector((state) => state.cart);
   const [observacao, setObservacao] = useState('');
   const [produto, setProduto] = useState({});
   const [quantity, setQuantity] = useState(1);
@@ -19,7 +17,7 @@ function Product() {
   useEffect(() => {
     const item = mock.filter((item) => item.id === parseInt(id));
     setProduto({ ...item[0] });
-  }, []);
+  }, [id]);
 
   const handleQuantity = (number) => {
     if (quantity > 1 && number < 0) {
@@ -33,6 +31,13 @@ function Product() {
   };
 
   const addItem = (item) => {
+    // const keys = Object.keys(carrinho);
+    // const inCart = keys.includes(item.name);
+    // if (inCart) {
+    //   const payload = { ...item, quantity: item.quantity + quantity}
+    //   {console.log('Produto depois de atualizado: ', payload)}
+    //   dispatch(updateQuantity(payload));
+    // }
     dispatch(addToCart(item));
   };
 
@@ -56,7 +61,7 @@ function Product() {
                 Quantidade:
                 <div className='quantity'>
                   <button
-                    className='btn badge badge-info'
+                    className='btn badge badge-danger'
                     type='button'
                     onClick={() => handleQuantity(-1)}
                   >
@@ -64,7 +69,7 @@ function Product() {
                   </button>
                   <span className='mx-2'>{quantity}</span>
                   <button
-                    className='btn badge badge-info'
+                    className='btn badge badge-success'
                     type='button'
                     onClick={() => handleQuantity(1)}
                   >

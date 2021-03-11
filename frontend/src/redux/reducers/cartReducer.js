@@ -12,7 +12,7 @@ export default function cart(state = initialState, { type, payload }) {
 
   switch (type) {
     case UPDATE_QUANTITY:
-      cartList[payload.name].quantity += payload.number;
+      cartList[payload.name] = { ...payload };
       break;
 
     case REMOVE_FROM_CART:
