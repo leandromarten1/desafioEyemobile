@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { addToCart, updateQuantity } from '../redux/actions';
-import mock from '../services/mockApi';
+import { getProductById } from '../services/api';
+import { getToken } from '../utils/helpers';
 
 function Product() {
   const dispatch = useDispatch();
@@ -14,9 +15,10 @@ function Product() {
   const [produto, setProduto] = useState({});
   const [quantity, setQuantity] = useState(1);
 
+  const token = getToken();
+
   useEffect(() => {
-    const item = mock.filter((item) => item.id === parseInt(id));
-    setProduto({ ...item[0] });
+    getProductById(token, id).then(({ data }) => setProduto(data));
   }, [id]);
 
   const handleQuantity = (number) => {
@@ -48,15 +50,15 @@ function Product() {
         <div className='row'>
           <div className='col-sm mb-4'>
             <img
-              src={produto.image}
+              src={produto.imagem}
               width='300px'
               height='200px'
-              alt={produto.name}
+              alt={produto.nome}
             />
           </div>
           <div className='col-sm'>
             <div className='d-flex flex-column'>
-              <h5 className='mb-4'>{produto.name}</h5>
+              <h5 className='mb-4'>{produto.nome}</h5>
               <div className='d-flex justify-content-around mb-4'>
                 Quantidade:
                 <div className='quantity'>
@@ -96,7 +98,7 @@ function Product() {
               >
                 Adicionar
               </button>
-              <Link to='/' className='btn btn-md btn-secondary'>
+              <Link to='/cardapio' className='btn btn-md btn-secondary'>
                 Voltar
               </Link>
             </div>

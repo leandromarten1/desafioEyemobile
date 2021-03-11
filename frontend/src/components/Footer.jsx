@@ -13,7 +13,7 @@ function Footer() {
   );
 
   const totalPrice = Object.values(carrinho)
-    .reduce((acc, curr) => curr.quantity * curr.price + acc, 0)
+    .reduce((acc, curr) => curr.quantity * curr.preco + acc, 0)
     .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
 
   const removeCartItems = () => {

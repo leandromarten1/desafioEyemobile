@@ -12,15 +12,15 @@ export default function cart(state = initialState, { type, payload }) {
 
   switch (type) {
     case UPDATE_QUANTITY:
-      cartList[payload.name] = { ...payload };
+      cartList[payload.nome] = { ...payload };
       break;
 
     case REMOVE_FROM_CART:
-      delete cartList[payload.name];
+      delete cartList[payload.nome];
       break;
 
     case ADD_TO_CART:
-      cartList[payload.name] = { ...payload };
+      cartList[payload.nome] = { ...payload };
       break;
 
     case REMOVE_CART:

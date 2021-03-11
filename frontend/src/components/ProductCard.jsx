@@ -9,20 +9,20 @@ const convertCurrency = (price) => {
 };
 
 function ProductCard(props) {
-  const { id, image, name, price } = props.info;
+  const { id, imagem, nome, preco } = props.info;
   return (
-    <Link to={`/${id}`}>
+    <Link to={`/cardapio/${id}`}>
       <div className='card d-flex mb-4 mx-2' style={{ width: '150px' }}>
         <img
           className='card-img-top'
-          src={image}
+          src={imagem}
           width={130}
           height={140}
-          alt={name}
+          alt={nome}
         />
         <div className='card-body p-2 text-center'>
-          <h5 className='card-title'>{name}</h5>
-          <p className='card-text'>{convertCurrency(price)}</p>
+          <h5 className='card-title'>{nome}</h5>
+          <p className='card-text'>{convertCurrency(preco)}</p>
         </div>
       </div>
     </Link>
