@@ -6,12 +6,18 @@ module.exports = (sequelize, DataTypes) => {
       preco: DataTypes.DECIMAL(4, 2),
       imagem: {
         type: DataTypes.STRING,
-        defaultValue:
-          'http://localhost:3001/images/no-image-found.gif',
+        defaultValue: 'http://localhost:3001/images/no-image-found.gif',
       },
     },
     { timestamps: false },
   );
+
+  Product.associate = (models) => {
+    Product.belongsToMany(models.Sales, {
+      through: models.Sales_products,
+      foreignKey: 'product_id',
+    });
+  };
 
   return Product;
 };

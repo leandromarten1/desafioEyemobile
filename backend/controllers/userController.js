@@ -1,12 +1,11 @@
 const router = require('express').Router();
-const { Product } = require('../models');
+const { User } = require('../models');
 const auth = require('../middlewares/auth');
 
-// Get all products
 router.get('/', auth, async (_req, res) => {
   try {
-    const products = await Product.findAll();
-    return res.status(200).json(products);
+    const users = await User.findAll();
+    return res.status(200).json(users);
   } catch (err) {
     return res.status(500).json({ message: 'Erro no servidor', err });
   }
