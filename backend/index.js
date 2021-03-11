@@ -12,7 +12,7 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 
 app.use('/', controllers.productController);
 app.use('/login', controllers.loginController);
-app.use('/checkout', (req, res) => res.json({message: 'Dados do formulario para salvar no DB'}))
+app.use('/checkout', controllers.salesController)
 
 
 const PORT = 3001;

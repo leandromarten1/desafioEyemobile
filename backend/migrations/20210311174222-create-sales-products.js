@@ -9,7 +9,7 @@ module.exports = {
       product_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: { model: 'Product', key: 'id' },
+        references: { model: 'Products', key: 'id' },
       },
       quantity: {
         allowNull: false,

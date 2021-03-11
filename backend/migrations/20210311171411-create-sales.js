@@ -7,10 +7,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      cliente_id: {
+      user_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: { model: 'User', key: 'id' },
+        references: { model: 'Users', key: 'id' },
       },
       preco_total: {
         allowNull: false,

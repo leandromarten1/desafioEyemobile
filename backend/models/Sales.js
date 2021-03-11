@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
       preco_total: DataTypes.INTEGER,
       endereco: DataTypes.STRING,
       forma_pagamento: DataTypes.STRING,
-      cliente_id: DataTypes.INTEGER,
+      user_id: DataTypes.INTEGER,
     },
     { timestamps: false },
   );
