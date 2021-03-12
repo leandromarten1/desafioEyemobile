@@ -1,5 +1,5 @@
 const express = require('express');
-const path = require('path')
+const path = require('path');
 const controllers = require('./controllers');
 const cors = require('cors');
 
@@ -12,8 +12,8 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 
 app.use('/cardapio', controllers.productController);
 app.use('/login', controllers.loginController);
-app.use('/checkout', controllers.salesController)
-
+app.use('/checkout', controllers.salesController);
+app.use('/cadastro', controllers.userController);
 
 const PORT = 3001;
 app.listen(PORT, () => console.log('Rodando na porta ', PORT));

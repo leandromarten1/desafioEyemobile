@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { User } = require('../models');
 const createToken = require('../middlewares/createToken');
+const bcrypt = require('bcrypt');
 
 router.post('/', async (req, res) => {
   const { email, password } = req.body;
@@ -11,15 +12,17 @@ router.post('/', async (req, res) => {
     }
   
     const { password: pwd, ...userData } = user.dataValues;
-  
-    if(pwd !== password) {
-      return res.status(401).json({ message: 'Senha incorreta' });
-    }
-  
-    if (user && password === pwd) {
-      const token = createToken(userData);
-      return res.status(200).json({ token, userData });
-    }
+
+    bcrypt.compare(password, pwd, (err, result) => {
+      if(!result) {
+        return res.status(401).json({ message: 'Senha incorreta' });
+      }
+      if (user && result) {
+        const token = createToken(userData);
+        return res.status(200).json({ token, userData });
+      }
+      
+    })
   } catch (err) {
     return res.status(500).json({ message: 'Erro no servidor', err });
   }
