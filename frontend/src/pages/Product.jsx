@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, Link, useHistory } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { addToCart, updateQuantity } from '../redux/actions';
+import { addToCart, updateQuantity, removeFromCart } from '../redux/actions';
 import { getProductById } from '../services/api';
 import { getToken } from '../utils/helpers';
 
 function Product() {
   const dispatch = useDispatch();
   const { id } = useParams();
-  // const carrinho = useSelector((state) => state.cart);
+  const carrinho = useSelector((state) => state.cart);
   const [observacao, setObservacao] = useState('');
   const [produto, setProduto] = useState({});
   const [quantity, setQuantity] = useState(1);
@@ -19,7 +19,7 @@ function Product() {
 
   useEffect(() => {
     getProductById(token, id).then(({ data }) => setProduto(data));
-  }, [id]);
+  }, [id, token]);
 
   const handleQuantity = (number) => {
     if (quantity > 1 && number < 0) {
@@ -33,18 +33,21 @@ function Product() {
   };
 
   const addItem = (item) => {
-    // const keys = Object.keys(carrinho);
-    // const inCart = keys.includes(item.name);
-    // if (inCart) {
-    //   const payload = { ...item, quantity: item.quantity + quantity}
-    //   {console.log('Produto depois de atualizado: ', payload)}
-    //   dispatch(updateQuantity(payload));
-    // }
-    dispatch(addToCart(item));
+    if (carrinho[item.nome]) {
+      // const payload = { ...item, quantity: item.quantity + quantity };
+      dispatch(updateQuantity(item));
+    } else {
+      dispatch(addToCart(item));
+    }
+  };
+
+  const removeItem = (item) => {
+      dispatch(removeFromCart(item));
   };
 
   return (
-    <div>
+    <div className="product">
+      {console.log('Carrinho do Redux: ', carrinho)}
       <Header />
       <div className='container text-center'>
         <div className='row'>
@@ -59,7 +62,7 @@ function Product() {
           <div className='col-sm'>
             <div className='d-flex flex-column'>
               <h5 className='mb-4'>{produto.nome}</h5>
-              <div className='d-flex justify-content-around mb-4'>
+              <div className='d-flex justify-content-around mb-2'>
                 Quantidade:
                 <div className='quantity'>
                   <button
@@ -79,7 +82,13 @@ function Product() {
                   </button>
                 </div>
               </div>
-
+              <div className='d-flex justify-content-around mb-4'>
+                Quantidade no carrinho:
+                <div className='quantity'>
+                  <strong>{carrinho[produto.nome] ? carrinho[produto.nome].quantity : 0 }</strong>
+                </div>
+                <button className='btn badge badge-success' onClick={() => removeItem(produto)}>Remover do carrinho</button>
+              </div>
               <form>
                 <div className='form-group'>
                   <label htmlFor='form'>Alguma observação?</label>

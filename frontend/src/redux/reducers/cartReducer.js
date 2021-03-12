@@ -12,10 +12,11 @@ export default function cart(state = initialState, { type, payload }) {
 
   switch (type) {
     case UPDATE_QUANTITY:
-      cartList[payload.nome] = { ...payload };
+      cartList[payload.nome].quantity += payload.quantity;
       break;
 
     case REMOVE_FROM_CART:
+      console.log(payload)
       delete cartList[payload.nome];
       break;
 
