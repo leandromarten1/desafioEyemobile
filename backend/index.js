@@ -10,7 +10,7 @@ app.use(cors());
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
-app.use('/', controllers.productController);
+app.use('/cardapio', controllers.productController);
 app.use('/login', controllers.loginController);
 app.use('/checkout', controllers.salesController)
 

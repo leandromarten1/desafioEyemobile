@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Sales } = require('../models');
+const { Sales, SalesProducts } = require('../models');
 const auth = require('../middlewares/auth');
 
 router.get('/', auth, async (_req, res) => {
@@ -15,26 +15,28 @@ router.get('/', auth, async (_req, res) => {
 });
 
 router.post('/', auth, async (req, res) => {
-  const { nome, email, endereco, pagamento } = req.body;
+  const { address, state, city, payment, products } = req.body;
   const { id } = req.user;
-  try {
-    // const sale = await sales.create({
-    //   user_id: id,
-    //   total_price: totalPrice,
-    //   delivery_address: deliveryAddress,
-    //   delivery_number: deliveryNumber,
-    //   sale_date: date,
-    //   status,
-    // });
-    // //cria aa tabela salesProdut
-    // cart.forEach(async (productCart) => {
-    //   const { id: productId, quantity } = productCart;
-    //   await salesProducts.create({
-    //     sale_id: sale.id,
-    //     product_id: productId,
-    //     quantity,
-    //   });
-  } catch (err) {}
+  const totalPrice = products.reduce(
+    (acc, { preco, quantity }) => acc + preco * quantity,
+    0,
+  );
+  const endereco = `${address}, ${city}, ${state}`;
+  const sale = await Sales.create({
+    user_id: id,
+    preco_total: totalPrice,
+    endereco,
+    forma_pagamento: payment,
+  });
+
+  products.forEach(async (productCart) => {
+    const { id: productId, quantity } = productCart;
+    await SalesProducts.create({
+      sale_id: sale.id,
+      product_id: productId,
+      quantity,
+    });
+  });
 });
 
 router.put('/', async (req, res) => {});
