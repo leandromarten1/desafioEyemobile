@@ -9,7 +9,12 @@ export const getProducts = async (token) =>
   axios.get(`${BASE_URL}/cardapio`, { headers: { authorization: token } });
 
 export const getProductById = async (token, id) =>
-  axios.get(`${BASE_URL}/cardapio/${id}`, { headers: { authorization: token } });
+  axios.get(`${BASE_URL}/cardapio/${id}`, {
+    headers: { authorization: token },
+  });
+
+export const signUp = async (nome, email, password) =>
+  axios.post(`${BASE_URL}/cadastro`, { nome, email, password });
 
 export const addSale = async (
   name,

@@ -4,6 +4,7 @@ import Menu from './pages/Menu';
 import Product from './pages/Product';
 import Checkout from './pages/Checkout';
 import Login from './pages/Login';
+import Signup from './pages/Signup';
 
 function App() {
   return (
@@ -16,6 +17,9 @@ function App() {
       </Route>
       <Route exact path='/login'>
         <Login />
+      </Route>
+      <Route exact path='/cadastro'>
+        <Signup />
       </Route>
       <Route exact path='/cardapio'>
         <Menu />

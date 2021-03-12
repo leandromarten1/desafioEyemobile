@@ -16,7 +16,6 @@ export default function cart(state = initialState, { type, payload }) {
       break;
 
     case REMOVE_FROM_CART:
-      console.log(payload)
       delete cartList[payload.nome];
       break;
 

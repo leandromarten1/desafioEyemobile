@@ -47,7 +47,6 @@ function Product() {
 
   return (
     <div className="product">
-      {console.log('Carrinho do Redux: ', carrinho)}
       <Header />
       <div className='container text-center'>
         <div className='row'>
