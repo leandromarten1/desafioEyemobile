@@ -19,7 +19,7 @@ Você precisa ter um sua máquina:
 
 ### 🔧 Instalação
 
-Rodando a aplicação:
+Clonando a aplicação:
 
 ```bash
 # Crie uma pasta de sua preferencia
